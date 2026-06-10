@@ -1,987 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4efe7" />
-  <title>For Keerthi</title>
-  <style>
-    :root {
-      --bg: #f4efe7;
-      --bg-2: #efe7dc;
-      --paper: rgba(255, 251, 246, 0.92);
-      --paper-border: rgba(109, 92, 74, 0.10);
-      --text: #4d463f;
-      --muted: #7a6f66;
-      --soft: rgba(120, 98, 80, 0.08);
-      --accent: #d6b0aa;
-      --accent-2: #cfae8f;
-      --shadow: 0 24px 80px rgba(76, 57, 43, 0.12);
-      --shadow-soft: 0 10px 30px rgba(76, 57, 43, 0.08);
-      --radius: 28px;
-      --radius-lg: 34px;
-      --maxw: 760px;
-    }
-
-    * { box-sizing: border-box; }
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, Montserrat, Poppins, system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(214,176,170,0.16), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(207,174,143,0.14), transparent 24%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(rgba(255,255,255,0.7) 0.9px, transparent 0.9px),
-        radial-gradient(rgba(255,255,255,0.35) 0.7px, transparent 0.7px);
-      background-size: 34px 34px, 58px 58px;
-      background-position: 0 0, 17px 21px;
-      opacity: 0.16;
-      mix-blend-mode: soft-light;
-    }
-
-    .noise {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.035;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
-    }
-
-    .scene {
-      position: relative;
-      min-height: 100vh;
-      overflow: hidden;
-    }
-
-    .intro,
-    .letter-wrap {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-
-    .intro {
-      position: relative;
-      text-align: center;
-      isolation: isolate;
-    }
-
-    .intro::after {
-      content: "";
-      position: absolute;
-      inset: 14% 7%;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.18) 35%, transparent 68%);
-      filter: blur(28px);
-      z-index: -1;
-      opacity: 0.7;
-      transform: scale(1.05);
-      animation: breathe 10s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1.0); opacity: 0.58; }
-      50% { transform: scale(1.08); opacity: 0.78; }
-    }
-
-    .intro-card {
-      width: min(100%, 540px);
-      padding: 28px 20px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.16);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 60px rgba(83, 62, 45, 0.08);
-      border: 1px solid rgba(255,255,255,0.34);
-    }
-
-    .intro h1 {
-      margin: 0 0 10px;
-      font-size: clamp(1.8rem, 5vw, 2.7rem);
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      color: #53483f;
-    }
-
-    .intro p {
-      margin: 0 auto 24px;
-      max-width: 34ch;
-      line-height: 1.7;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .open-btn {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      padding: 16px 22px;
-      border-radius: 999px;
-      min-width: min(100%, 320px);
-      font: inherit;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      color: #4d4138;
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,238,229,0.92));
-      box-shadow: 0 12px 35px rgba(81, 64, 49, 0.14), inset 0 1px 0 rgba(255,255,255,0.9);
-      border: 1px solid rgba(122, 107, 98, 0.10);
-      transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease, filter 220ms ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .open-btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.48) 20%, transparent 40%);
-      transform: translateX(-120%);
-      transition: transform 700ms ease;
-    }
-
-    .open-btn:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 18px 44px rgba(81, 64, 49, 0.16), inset 0 1px 0 rgba(255,255,255,0.95);
-      filter: saturate(1.02);
-    }
-
-    .open-btn:hover::before { transform: translateX(120%); }
-    .open-btn:active { transform: translateY(1px) scale(0.99); }
-
-    .hint {
-      margin-top: 14px;
-      font-size: 0.92rem;
-      color: rgba(94, 82, 71, 0.72);
-    }
-
-    .letter-wrap {
-      position: relative;
-      padding: 18px 14px 38px;
-      opacity: 0;
-      transform: translateY(22px) scale(0.985);
-      pointer-events: none;
-      transition: opacity 700ms ease, transform 700ms ease;
-    }
-
-    .scene.revealed .intro {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.99);
-      transition: opacity 550ms ease, transform 550ms ease;
-    }
-
-    .scene.revealed .letter-wrap {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-
-    .scene.revealed .floating-petals,
-    .scene.revealed .sparkles {
-      opacity: 1;
-    }
-
-    .letter-card {
-      position: relative;
-      width: min(100%, var(--maxw));
-      background: linear-gradient(180deg, rgba(255,252,248,0.97), rgba(250,244,236,0.96));
-      border: 1px solid var(--paper-border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .letter-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgba(214,176,170,0.22), transparent 26%),
-        radial-gradient(circle at bottom right, rgba(207,174,143,0.15), transparent 20%);
-      pointer-events: none;
-    }
-
-    .letter-inner {
-      position: relative;
-      padding: 28px 18px 20px;
-    }
-
-    .paper-topline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 22px;
-      color: rgba(92, 80, 71, 0.7);
-      font-size: 0.86rem;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-    }
-
-    .paper-topline .line {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, transparent, rgba(129, 109, 94, 0.16), transparent);
-    }
-
-    .letter-content {
-      max-width: 64ch;
-      margin: 0 auto;
-      padding: 0 4px;
-      font-size: clamp(1.02rem, 2.4vw, 1.16rem);
-      line-height: 1.95;
-      letter-spacing: 0.002em;
-      color: #514941;
-      text-wrap: pretty;
-    }
-
-    .letter-content p {
-      margin: 0 0 1.1em;
-      white-space: pre-wrap;
-    }
-
-    .letter-content p:first-child {
-      margin-top: 0;
-    }
-
-    .letter-content p:last-child {
-      margin-bottom: 0;
-    }
-
-    .sig {
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(123, 106, 95, 0.11);
-      font-size: 1.02rem;
-      line-height: 1.9;
-      color: #5b524b;
-    }
-
-    .sig strong {
-      font-weight: 500;
-    }
-
-    .music-shell {
-      margin-top: 26px;
-      padding: 16px;
-      border-radius: 24px;
-      background: linear-gradient(180deg, rgba(249,244,237,0.96), rgba(243,235,224,0.96));
-      border: 1px solid rgba(122, 107, 98, 0.10);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .music-shell.glow {
-      box-shadow: 0 0 0 1px rgba(219, 188, 173, 0.2), 0 18px 48px rgba(84, 66, 52, 0.16), 0 0 52px rgba(214, 176, 170, 0.12);
-    }
-
-    .music-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(214,176,170,0.18), transparent 30%);
-      pointer-events: none;
-    }
-
-    .player-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .player-title {
-      display: grid;
-      gap: 3px;
-    }
-
-    .player-title .song {
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      color: #4c433b;
-    }
-
-    .player-title .artist {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(128, 103, 92, 0.35);
-      box-shadow: 0 0 0 5px rgba(128, 103, 92, 0.08);
-      transition: background 180ms ease, box-shadow 180ms ease;
-      flex: 0 0 auto;
-    }
-
-    .playing .status-dot {
-      background: #b88a86;
-      box-shadow: 0 0 0 5px rgba(184, 138, 134, 0.15);
-    }
-
-    .player-body {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 14px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .art {
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.8), transparent 24%),
-        radial-gradient(circle at 70% 72%, rgba(255,255,255,0.2), transparent 26%),
-        linear-gradient(145deg, #d8b4b1, #e8d4ba 58%, #c4a796);
-      display: grid;
-      place-items: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 10px 24px rgba(92, 72, 55, 0.16);
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(0);
-      transition: transform 280ms ease;
-    }
-
-    .playing .art {
-      animation: spin 12s linear infinite;
-    }
-
-    .art::before {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.34);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
-    }
-
-    .art::after {
-      content: "";
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.88);
-      box-shadow: 0 0 0 6px rgba(255,255,255,0.12);
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .player-controls {
-      display: grid;
-      gap: 11px;
-    }
-
-    .transport {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .icon-btn {
-      appearance: none;
-      border: 0;
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #5c5248;
-      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(243,236,227,0.94));
-      box-shadow: 0 10px 20px rgba(85, 67, 51, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
-      border: 1px solid rgba(122, 107, 98, 0.08);
-      transition: transform 180ms ease, box-shadow 180ms ease;
-      flex: 0 0 auto;
-    }
-
-    .icon-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 26px rgba(85, 67, 51, 0.14), inset 0 1px 0 rgba(255,255,255,0.92);
-    }
-
-    .icon-btn:active { transform: translateY(1px) scale(0.98); }
-
-    .play-label {
-      font-size: 0.94rem;
-      color: #5b524b;
-      opacity: 0.9;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 7px;
-    }
-
-    .progress-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
-      color: rgba(88, 79, 70, 0.72);
-    }
-
-    .progress {
-      width: 100%;
-      appearance: none;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(123, 106, 95, 0.14);
-      outline: none;
-      overflow: hidden;
-    }
-
-    .progress::-webkit-slider-thumb {
-      appearance: none;
-      width: 0;
-      height: 0;
-      box-shadow: -1000px 0 0 1000px rgba(188, 138, 134, 0.88);
-    }
-
-    .progress::-moz-range-thumb {
-      width: 0;
-      height: 0;
-      border: 0;
-      background: transparent;
-      box-shadow: -1000px 0 0 1000px rgba(188, 138, 134, 0.88);
-    }
-
-    .volume-row {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .volume-row .label {
-      font-size: 0.82rem;
-      color: rgba(88, 79, 70, 0.72);
-      min-width: 42px;
-    }
-
-    .volume {
-      width: 100%;
-      appearance: none;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(123, 106, 95, 0.14);
-      outline: none;
-      overflow: hidden;
-    }
-
-    .volume::-webkit-slider-thumb {
-      appearance: none;
-      width: 0;
-      height: 0;
-      box-shadow: -1000px 0 0 1000px rgba(183, 165, 135, 0.9);
-    }
-
-    .volume::-moz-range-thumb {
-      width: 0;
-      height: 0;
-      border: 0;
-      background: transparent;
-      box-shadow: -1000px 0 0 1000px rgba(183, 165, 135, 0.9);
-    }
-
-    .float-layer,
-    .sparkle-layer,
-    .corner-flower {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .float-layer { z-index: 1; }
-    .sparkle-layer { z-index: 2; }
-    .corner-flower { z-index: 3; opacity: 0.55; }
-
-    .petal,
-    .sparkle {
-      position: absolute;
-      will-change: transform, opacity;
-      transform: translate3d(0,0,0);
-    }
-
-    .petal {
-      width: 14px;
-      height: 20px;
-      border-radius: 50% 50% 44% 44%;
-      background: linear-gradient(180deg, rgba(238, 214, 210, 0.9), rgba(211, 171, 166, 0.55));
-      filter: blur(0.2px);
-      opacity: 0.34;
-      clip-path: polygon(50% 0%, 82% 18%, 100% 52%, 70% 100%, 30% 100%, 0% 52%, 18% 18%);
-    }
-
-    .sparkle {
-      width: 3px;
-      height: 3px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 0 10px rgba(255,255,255,0.45);
-      opacity: 0.44;
-    }
-
-    .corner-flower svg {
-      position: absolute;
-      width: min(28vw, 180px);
-      height: auto;
-      opacity: 0.12;
-      transition: transform 260ms ease, opacity 260ms ease;
-      filter: drop-shadow(0 6px 16px rgba(66, 48, 39, 0.05));
-    }
-
-    .corner-flower .tl { top: 10px; left: 8px; transform: rotate(-8deg); }
-    .corner-flower .tr { top: 10px; right: 8px; transform: scaleX(-1) rotate(-8deg); }
-    .corner-flower .bl { bottom: 8px; left: 6px; transform: scaleY(-1) rotate(-8deg); }
-    .corner-flower .br { bottom: 8px; right: 6px; transform: scale(-1) rotate(-8deg); }
-
-    .flower-hover .corner-flower svg {
-      opacity: 0.18;
-    }
-
-    .flower-hover .corner-flower .tl,
-    .flower-hover .corner-flower .br {
-      transform: rotate(-4deg) scale(1.04);
-    }
-
-    .flower-hover .corner-flower .tr,
-    .flower-hover .corner-flower .bl {
-      transform: scaleX(-1) rotate(-4deg) scale(1.04);
-    }
-
-    .flower-hover .corner-flower .bl,
-    .flower-hover .corner-flower .br {
-      transform-origin: center;
-    }
-
-    .reveal-sheen {
-      position: absolute;
-      inset: -20% -10%;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.22) 50%, transparent 65%);
-      transform: translateX(-70%);
-      animation: sheen 5s ease-in-out infinite;
-      pointer-events: none;
-      opacity: 0.45;
-    }
-
-    @keyframes sheen {
-      0%, 55% { transform: translateX(-70%) rotate(4deg); }
-      70%, 100% { transform: translateX(70%) rotate(4deg); }
-    }
-
-    .footer-space { height: 18px; }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    @media (min-width: 720px) {
-      .letter-inner { padding: 36px 34px 28px; }
-      .intro-card { padding: 36px 34px; }
-      .player-body { grid-template-columns: 88px 1fr; }
-      .art { width: 88px; height: 88px; border-radius: 26px; }
-      .paper-topline { margin-bottom: 28px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Keerthi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#efc8d1;
+--paper:#f8f4ef;
+--text:#574d48;
+--accent:#c86d5c;
+}
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:24px;
+text-align:center;
+}
+.card{
+background:rgba(248,244,239,.96);
+padding:32px;
+border-radius:32px;
+max-width:420px;
+width:100%;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+h1{font-size:2.3rem;margin:.2rem 0}
+p{line-height:1.8}
+button{
+border:none;
+background:#f2dfd7;
+padding:14px 28px;
+border-radius:999px;
+font:inherit;
+cursor:pointer;
+}
+.letter{
+display:none;
+padding:24px 16px 80px;
+}
+.paper{
+max-width:760px;
+margin:auto;
+background:var(--paper);
+padding:24px;
+border-radius:28px;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+.content{
+font-size:1.1rem;
+line-height:2;
+}
+.music{
+margin-top:40px;
+padding:18px;
+background:#f4ece5;
+border-radius:20px;
+}
+audio{width:100%}
+.sig{
+margin-top:40px;
+padding-top:20px;
+border-top:1px solid #ddd;
+}
+@media(min-width:768px){
+.paper{padding:48px}
+.content{font-size:1.18rem}
+}
+</style>
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="float-layer" id="petalLayer" aria-hidden="true"></div>
-  <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
-  <div class="corner-flower" aria-hidden="true">
-    <svg class="tl" viewBox="0 0 220 220" fill="none">
-      <path d="M117 165c-2-18 5-30 13-40 8-11 16-21 16-38 0-18-9-31-26-38-17-7-35-6-50 4-16 10-25 26-25 44 0 17 7 27 15 39 9 13 13 24 11 40" stroke="#c38f8d" stroke-width="4" stroke-linecap="round"/>
-      <path d="M110 166c-16-20-28-28-39-32-8-3-13-3-22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M107 167c16-20 28-28 39-32 8-3 13-3 22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M111 72c10 8 18 18 20 31-12 0-22-3-31-10 2-10 5-17 11-21Z" fill="#d7a7a5"/>
-      <path d="M110 70c-11 8-19 18-21 31 12 0 22-3 31-10-2-10-5-17-10-21Z" fill="#e3bfba"/>
-      <path d="M112 71c0-14 6-24 17-32 4 14 2 25-4 34-5 1-9 0-13-2Z" fill="#cda686"/>
-      <path d="M109 70c-1-14-7-24-18-32-4 14-2 25 5 34 5 1 9 0 13-2Z" fill="#d8c0ac"/>
-    </svg>
-    <svg class="tr" viewBox="0 0 220 220" fill="none">
-      <path d="M117 165c-2-18 5-30 13-40 8-11 16-21 16-38 0-18-9-31-26-38-17-7-35-6-50 4-16 10-25 26-25 44 0 17 7 27 15 39 9 13 13 24 11 40" stroke="#c38f8d" stroke-width="4" stroke-linecap="round"/>
-      <path d="M110 166c-16-20-28-28-39-32-8-3-13-3-22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M107 167c16-20 28-28 39-32 8-3 13-3 22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M111 72c10 8 18 18 20 31-12 0-22-3-31-10 2-10 5-17 11-21Z" fill="#d7a7a5"/>
-      <path d="M110 70c-11 8-19 18-21 31 12 0 22-3 31-10-2-10-5-17-10-21Z" fill="#e3bfba"/>
-      <path d="M112 71c0-14 6-24 17-32 4 14 2 25-4 34-5 1-9 0-13-2Z" fill="#cda686"/>
-      <path d="M109 70c-1-14-7-24-18-32-4 14-2 25 5 34 5 1 9 0 13-2Z" fill="#d8c0ac"/>
-    </svg>
-    <svg class="bl" viewBox="0 0 220 220" fill="none">
-      <path d="M117 165c-2-18 5-30 13-40 8-11 16-21 16-38 0-18-9-31-26-38-17-7-35-6-50 4-16 10-25 26-25 44 0 17 7 27 15 39 9 13 13 24 11 40" stroke="#c38f8d" stroke-width="4" stroke-linecap="round"/>
-      <path d="M110 166c-16-20-28-28-39-32-8-3-13-3-22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M107 167c16-20 28-28 39-32 8-3 13-3 22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M111 72c10 8 18 18 20 31-12 0-22-3-31-10 2-10 5-17 11-21Z" fill="#d7a7a5"/>
-      <path d="M110 70c-11 8-19 18-21 31 12 0 22-3 31-10-2-10-5-17-10-21Z" fill="#e3bfba"/>
-      <path d="M112 71c0-14 6-24 17-32 4 14 2 25-4 34-5 1-9 0-13-2Z" fill="#cda686"/>
-      <path d="M109 70c-1-14-7-24-18-32-4 14-2 25 5 34 5 1 9 0 13-2Z" fill="#d8c0ac"/>
-    </svg>
-    <svg class="br" viewBox="0 0 220 220" fill="none">
-      <path d="M117 165c-2-18 5-30 13-40 8-11 16-21 16-38 0-18-9-31-26-38-17-7-35-6-50 4-16 10-25 26-25 44 0 17 7 27 15 39 9 13 13 24 11 40" stroke="#c38f8d" stroke-width="4" stroke-linecap="round"/>
-      <path d="M110 166c-16-20-28-28-39-32-8-3-13-3-22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M107 167c16-20 28-28 39-32 8-3 13-3 22-2" stroke="#b58d74" stroke-width="4" stroke-linecap="round"/>
-      <path d="M111 72c10 8 18 18 20 31-12 0-22-3-31-10 2-10 5-17 11-21Z" fill="#d7a7a5"/>
-      <path d="M110 70c-11 8-19 18-21 31 12 0 22-3 31-10-2-10-5-17-10-21Z" fill="#e3bfba"/>
-      <path d="M112 71c0-14 6-24 17-32 4 14 2 25-4 34-5 1-9 0-13-2Z" fill="#cda686"/>
-      <path d="M109 70c-1-14-7-24-18-32-4 14-2 25 5 34 5 1 9 0 13-2Z" fill="#d8c0ac"/>
-    </svg>
-  </div>
 
-  <main class="scene" id="scene">
-    <section class="intro" id="intro">
-      <div class="intro-card">
-        <h1>Hi Keerthi</h1>
-        <p>A quiet little page made to feel like a letter someone kept safe and finished with care.</p>
-        <button class="open-btn" id="openBtn" type="button">Open this when you feel like it 🌷</button>
-        <div class="hint">Soft, calm, and made for a late-night read.</div>
-      </div>
-    </section>
+<section class="hero" id="hero">
+<div class="card">
+<div style="font-size:26px">🌷</div>
+<h1>for keerthi.</h1>
+<p>a small letter for one of my favourite people.</p>
+<button onclick="openLetter()">open 🌷</button>
+</div>
+</section>
 
-    <section class="letter-wrap" id="letterWrap" aria-label="Letter for Keerthi">
-      <article class="letter-card" id="letterCard">
-        <div class="reveal-sheen" aria-hidden="true"></div>
-        <div class="letter-inner">
-          <div class="paper-topline" aria-hidden="true">
-            <span>Private note</span>
-            <span class="line"></span>
-            <span>For Keerthi</span>
-          </div>
+<section class="letter" id="letter">
+<div class="paper">
+<div class="content">
+<p>Hi Keerthi,</p>
+<p>I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to. It always feels like we're really disconnected from each other.</p>
+<p>We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.</p>
+<p>Keerthi, trust me you will feel every hour we put into building our future will be worth it.</p>
+<p>I, by all means don't take you for granted.</p>
+<p>I genuinely feel worse when I'm not able to show you the care you need when i really want to.</p>
+<p>Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.</p>
+<p>We, yes we have to change it.</p>
+<p>I don't know if its the right time to send it to you or not, but I genuinely think its always a good time to surprise you with these paragraphs and make you happy.</p>
+<p>This is my love language, sending letters to you on random occassions to see you happy.</p>
+<p>You're the best thing that has happened to me, I love you and I'm sorry, i mean these words. really.</p>
+<p>We have to stay by each others side.</p>
+<p>If we're not able to text, its okay, its not the end of the world for us, a simple "I'm sorry" and "I love you" will make our day brighter.</p>
+<p>I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.</p>
+<p>They made us meet with their own will.</p>
+<p>Its our task to keep it going no matter how difficult it gets.</p>
+<p>Kavya, Keerthi, Renii, Bujamma, Diet Coke.</p>
+<p>Conrad is always yours.</p>
+<p>You're always mine, I'm always yours.</p>
+<p>I love you babe. 💗🎀🫶</p>
 
-          <div class="letter-content" id="letterContent">
-            <p>Hi Keerthi,</p>
-            <p>I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to. It always feels like we're really disconnected from each other.</p>
-            <p>We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.</p>
-            <p>Keerthi, trust me you will feel every hour we put into building our future will be worth it.</p>
-            <p>I, by all means don't take you for granted.</p>
-            <p>I genuinely feel worse when I'm not able to show you the care you need when i really want to.</p>
-            <p>Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.</p>
-            <p>We, yes we have to change it.</p>
-            <p>I don't know if its the right time to send it to you or not, but I genuinely think its always a good time to surprise you with these paragraphs and make you happy.</p>
-            <p>This is my love language, sending letters to you on random occassions to see you happy.</p>
-            <p>You're the best thing that has happened to me, I love you and I'm sorry, i mean these words. really.</p>
-            <p>We have to stay by each others side.</p>
-            <p>If we're not able to text, its okay, its not the end of the world for us, a simple "I'm sorry" and "I love you" will make our day brighter.</p>
-            <p>I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.</p>
-            <p>They made us meet with their own will.</p>
-            <p>Its our task to keep it going no matter how difficult it gets.</p>
-            <p>Kavya, Keerthi, Renii, Bujamma, Diet Coke.</p>
-            <p>Conrad is always yours.</p>
-            <p>You're always mine, I'm always yours.</p>
-            <p>I love you babe. 💗🎀🫶</p>
+<div class="music">
+<div><strong>♪ Gundellona</strong></div>
+<audio controls src="gundellona.mp3"></audio>
+</div>
 
-            <div class="sig">
-              Forever Yours,<br />
-              <strong>Conrad</strong>
-            </div>
+<div class="sig">
+Forever Yours,<br><strong>Conrad</strong><br><br>
+<small>always.</small>
+</div>
+</div>
+</div>
+</section>
 
-            <div class="music-shell" id="musicShell">
-              <div class="player-head">
-                <div class="player-title">
-                  <div class="song">Gundellona</div>
-                  <div class="artist">Premium personal player</div>
-                </div>
-                <div class="status-dot" id="statusDot" aria-hidden="true"></div>
-              </div>
-
-              <div class="player-body">
-                <div class="art" id="art" aria-hidden="true"></div>
-
-                <div class="player-controls">
-                  <div class="transport">
-                    <button class="icon-btn" id="playBtn" type="button" aria-label="Play or pause music">
-                      <svg id="playIcon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                        <path d="M7 5.5v9l7-4.5-7-4.5Z" fill="currentColor"/>
-                      </svg>
-                    </button>
-                    <div class="play-label" id="playLabel">Tap to play</div>
-                  </div>
-
-                  <div class="timeline">
-                    <input class="progress" id="progress" type="range" min="0" max="1000" value="0" aria-label="Track progress" />
-                    <div class="progress-row">
-                      <span id="currentTime">0:00</span>
-                      <span style="flex:1"></span>
-                      <span id="duration">0:00</span>
-                    </div>
-                  </div>
-
-                  <div class="volume-row">
-                    <div class="label">Volume</div>
-                    <input class="volume" id="volume" type="range" min="0" max="100" value="78" aria-label="Volume" />
-                  </div>
-                </div>
-              </div>
-
-              <audio id="audio" preload="metadata" src="gundellona.mp3"></audio>
-            </div>
-          </div>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <div class="sr-only" aria-live="polite" id="liveRegion"></div>
-
-  <script>
-    (function () {
-      const scene = document.getElementById('scene');
-      const intro = document.getElementById('intro');
-      const letterWrap = document.getElementById('letterWrap');
-      const openBtn = document.getElementById('openBtn');
-      const musicShell = document.getElementById('musicShell');
-      const playBtn = document.getElementById('playBtn');
-      const playIcon = document.getElementById('playIcon');
-      const playLabel = document.getElementById('playLabel');
-      const audio = document.getElementById('audio');
-      const progress = document.getElementById('progress');
-      const currentTime = document.getElementById('currentTime');
-      const duration = document.getElementById('duration');
-      const volume = document.getElementById('volume');
-      const liveRegion = document.getElementById('liveRegion');
-      const petalLayer = document.getElementById('petalLayer');
-      const sparkleLayer = document.getElementById('sparkleLayer');
-      const letterCard = document.getElementById('letterCard');
-      const statusDot = document.getElementById('statusDot');
-
-      let isDragging = false;
-      let revealed = false;
-      let rafId = null;
-      let petals = [];
-      let sparkles = [];
-
-      function formatTime(seconds) {
-        if (!isFinite(seconds) || seconds < 0) return '0:00';
-        const m = Math.floor(seconds / 60);
-        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-        return `${m}:${s}`;
-      }
-
-      function setPlayState(playing) {
-        scene.classList.toggle('flower-hover', playing);
-        musicShell.classList.toggle('glow', playing);
-        letterCard.classList.toggle('playing', playing);
-        document.body.classList.toggle('playing', playing);
-        statusDot.style.background = playing ? '#b88a86' : 'rgba(128, 103, 92, 0.35)';
-        statusDot.style.boxShadow = playing ? '0 0 0 5px rgba(184, 138, 134, 0.15)' : '0 0 0 5px rgba(128, 103, 92, 0.08)';
-        playLabel.textContent = playing ? 'Playing now' : 'Tap to play';
-        playIcon.innerHTML = playing
-          ? '<path d="M6 5.5h3v9H6v-9Zm5 0h3v9h-3v-9Z" fill="currentColor"/>'
-          : '<path d="M7 5.5v9l7-4.5-7-4.5Z" fill="currentColor"/>';
-      }
-
-      function updateProgress() {
-        if (!isDragging && isFinite(audio.duration) && audio.duration > 0) {
-          progress.value = Math.round((audio.currentTime / audio.duration) * 1000);
-        }
-        currentTime.textContent = formatTime(audio.currentTime || 0);
-        duration.textContent = formatTime(audio.duration || 0);
-      }
-
-      function animateParticles() {
-        petals.forEach(p => {
-          p.y += p.speed;
-          p.x += Math.sin((p.y + p.seed) * 0.012) * p.drift;
-          p.rot += p.spin;
-          if (p.y > window.innerHeight + 40) {
-            p.y = -40 - Math.random() * 120;
-            p.x = Math.random() * window.innerWidth;
-            p.speed = 0.4 + Math.random() * 1.1;
-          }
-          p.el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) rotate(${p.rot}deg)`;
-        });
-
-        sparkles.forEach(s => {
-          s.y += s.speed;
-          s.x += s.wobble;
-          s.opacity += s.twinkle;
-          if (s.opacity > 0.62 || s.opacity < 0.12) s.twinkle *= -1;
-          if (s.y > window.innerHeight + 20) {
-            s.y = -20 - Math.random() * 80;
-            s.x = Math.random() * window.innerWidth;
-          }
-          s.el.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
-          s.el.style.opacity = s.opacity;
-        });
-
-        rafId = requestAnimationFrame(animateParticles);
-      }
-
-      function createPetals() {
-        petalLayer.innerHTML = '';
-        sparkleLayer.innerHTML = '';
-        petals = [];
-        sparkles = [];
-
-        const petalCount = Math.max(10, Math.min(16, Math.floor(window.innerWidth / 90)));
-        const sparkleCount = Math.max(12, Math.min(22, Math.floor(window.innerWidth / 70)));
-
-        for (let i = 0; i < petalCount; i++) {
-          const el = document.createElement('span');
-          el.className = 'petal';
-          petalLayer.appendChild(el);
-          petals.push({
-            el,
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            speed: 0.35 + Math.random() * 1.2,
-            drift: 0.1 + Math.random() * 0.4,
-            rot: Math.random() * 360,
-            spin: -0.35 + Math.random() * 0.7,
-            seed: Math.random() * 1000
-          });
-        }
-
-        for (let i = 0; i < sparkleCount; i++) {
-          const el = document.createElement('span');
-          el.className = 'sparkle';
-          sparkleLayer.appendChild(el);
-          sparkles.push({
-            el,
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            speed: 0.15 + Math.random() * 0.28,
-            wobble: (-0.18 + Math.random() * 0.36),
-            opacity: 0.14 + Math.random() * 0.26,
-            twinkle: 0.004 + Math.random() * 0.01
-          });
-        }
-      }
-
-      function revealLetter() {
-        if (revealed) return;
-        revealed = true;
-        scene.classList.add('revealed');
-        intro.setAttribute('aria-hidden', 'true');
-        letterWrap.removeAttribute('aria-hidden');
-        liveRegion.textContent = 'Letter opened.';
-        setTimeout(() => {
-          letterWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 140);
-      }
-
-      openBtn.addEventListener('click', revealLetter);
-      openBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          revealLetter();
-        }
-      });
-
-      playBtn.addEventListener('click', async () => {
-        try {
-          if (audio.paused) {
-            await audio.play();
-          } else {
-            audio.pause();
-          }
-        } catch (err) {
-          liveRegion.textContent = 'Audio could not start. Make sure gundellona.mp3 is in the same folder.';
-        }
-      });
-
-      audio.addEventListener('play', () => setPlayState(true));
-      audio.addEventListener('pause', () => setPlayState(false));
-      audio.addEventListener('timeupdate', updateProgress);
-      audio.addEventListener('loadedmetadata', updateProgress);
-      audio.addEventListener('durationchange', updateProgress);
-      audio.addEventListener('ended', () => {
-        setPlayState(false);
-        progress.value = 0;
-      });
-
-      progress.addEventListener('input', () => {
-        isDragging = true;
-        const pct = Number(progress.value) / 1000;
-        if (isFinite(audio.duration)) {
-          audio.currentTime = pct * audio.duration;
-        }
-        currentTime.textContent = formatTime(audio.currentTime || 0);
-      });
-      progress.addEventListener('change', () => { isDragging = false; });
-      progress.addEventListener('pointerup', () => { isDragging = false; });
-      progress.addEventListener('touchend', () => { isDragging = false; });
-
-      volume.addEventListener('input', () => {
-        audio.volume = Number(volume.value) / 100;
-      });
-
-      window.addEventListener('resize', () => {
-        createPetals();
-      });
-
-      // Gentle parallax for depth, kept subtle.
-      window.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 10;
-        const y = (e.clientY / window.innerHeight - 0.5) * 10;
-        const offset = `translate3d(${x * 0.5}px, ${y * 0.5}px, 0)`;
-        document.documentElement.style.setProperty('--parallax', offset);
-        letterCard.style.transform = `translate3d(${x * 0.04}px, ${y * 0.04}px, 0)`;
-      }, { passive: true });
-
-      window.addEventListener('deviceorientation', (e) => {
-        const x = (e.gamma || 0) / 20;
-        const y = (e.beta || 0) / 20;
-        letterCard.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      }, { passive: true });
-
-      // Initialize
-      audio.volume = Number(volume.value) / 100;
-      createPetals();
-      animateParticles();
-      setPlayState(false);
-      updateProgress();
-      letterWrap.setAttribute('aria-hidden', 'false');
-    })();
-  </script>
+<script>
+function openLetter(){
+document.getElementById('hero').style.display='none';
+document.getElementById('letter').style.display='block';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 </body>
 </html>
