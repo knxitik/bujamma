@@ -1,0 +1,332 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Keerthi 🌷</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f8f4ef;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+    font-family:'Poppins',sans-serif;
+    position:relative;
+}
+
+/* Tulips */
+
+.tulip{
+    position:absolute;
+    font-size:140px;
+    opacity:0.08;
+    user-select:none;
+}
+
+.t1{
+    top:20px;
+    left:25px;
+}
+
+.t2{
+    bottom:20px;
+    right:25px;
+}
+
+/* Floating petals */
+
+.petal{
+    position:absolute;
+    opacity:0.12;
+    font-size:20px;
+    animation:fall linear infinite;
+}
+
+.p1{
+    left:15%;
+    animation-duration:12s;
+}
+
+.p2{
+    left:45%;
+    animation-duration:15s;
+    animation-delay:3s;
+}
+
+.p3{
+    left:75%;
+    animation-duration:18s;
+    animation-delay:6s;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-100px) rotate(0deg);
+    }
+
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+
+/* Opening section */
+
+.opening{
+    text-align:center;
+    padding:20px;
+}
+
+.open-btn{
+    background:#e7d1c8;
+    color:#5d4a45;
+    border:none;
+    border-radius:40px;
+    padding:18px 35px;
+    cursor:pointer;
+    font-size:1.1rem;
+    transition:0.3s;
+}
+
+.open-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Letter */
+
+.letter{
+    display:none;
+    max-width:900px;
+    margin:40px;
+    background:white;
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    animation:fadeIn 1.4s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#6d5952;
+    font-family:'Cormorant Garamond',serif;
+    font-size:3rem;
+}
+
+.music-container{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.music-btn{
+    background:#f0e2db;
+    color:#5c4b46;
+    border:none;
+    padding:12px 24px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:1rem;
+}
+
+.music-btn:hover{
+    transform:translateY(-2px);
+}
+
+.message{
+    white-space:pre-line;
+    color:#444;
+    line-height:2;
+    font-size:1rem;
+}
+
+.signature{
+    margin-top:40px;
+    text-align:right;
+    color:#6d5952;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.8rem;
+}
+
+@media(max-width:768px){
+
+    .letter{
+        padding:30px;
+        margin:15px;
+    }
+
+    h1{
+        font-size:2.2rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="tulip t1">🌷</div>
+<div class="tulip t2">🌷</div>
+
+<div class="petal p1">🌸</div>
+<div class="petal p2">🌸</div>
+<div class="petal p3">🌸</div>
+
+<div class="opening" id="opening">
+
+    <button class="open-btn" onclick="openLetter()">
+        Open this when you feel like it 💗
+    </button>
+
+</div>
+
+<div class="letter" id="letter">
+
+    <h1>For Keerthi 🌷</h1>
+
+    <div class="music-container">
+
+        <button class="music-btn" onclick="toggleMusic()">
+            🎵 Play Our Song
+        </button>
+
+        <audio id="bgMusic">
+            <source src="gundellona.mp3" type="audio/mpeg">
+        </audio>
+
+    </div>
+
+<div class="message">
+
+Hi Keerthi,
+
+I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to.
+
+It always feels like we're really disconnected from each other.
+
+We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.
+
+Keerthi, trust me you will feel every hour we put into building our future will be worth it.
+
+I, by all means don't take you for granted.
+
+I genuinely feel worse when I'm not able to show you the care you need when I really want to.
+
+Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.
+
+We, yes we have to change it.
+
+I don't know if it's the right time to send it to you or not, but I genuinely think it's always a good time to surprise you with these paragraphs and make you happy.
+
+This is my love language, sending letters to you and making edits of you on random occasions to see you happy.
+
+You're the best thing that has happened to me. You really mean the world to me.
+
+I love you and I'm sorry.
+
+I mean these words.
+
+Really.
+
+We have to stay by each others side.
+
+If we're not able to text, it's okay.
+
+It's not the end of the world for us.
+
+A simple "I'm sorry" and "I love you" will make our day brighter.
+
+I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.
+
+They made us meet with their own will.
+
+Its our task to keep it going no matter how difficult it gets.
+
+Kavya.
+Keerthi.
+Renii.
+Bujamma.
+Diet Coke.
+
+Conrad is always yours.
+
+You're always mine.
+
+I'm always yours.
+
+I love you babe. 💗🎀🫶
+
+</div>
+
+<div class="signature">
+Forever Yours,<br>
+Conrad
+</div>
+
+</div>
+
+<script>
+
+function openLetter(){
+
+    document.getElementById("opening").style.display = "none";
+
+    document.getElementById("letter").style.display = "block";
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function toggleMusic(){
+
+    const music = document.getElementById("bgMusic");
+    const button = document.querySelector(".music-btn");
+
+    if(music.paused){
+
+        music.play();
+
+        button.innerHTML = "⏸ Pause How it all started";
+
+    }else{
+
+        music.pause();
+
+        button.innerHTML = "🎵 Play How it all started";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
