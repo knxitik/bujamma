@@ -1,332 +1,485 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Keerthi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #FCFBF9; /* Warm cream */
+            --card-bg: #FFFFFF; /* Ivory/Off-white */
+            --text-main: #4A4846; /* Warm gray */
+            --text-light: #7A7875;
+            --accent-blush: #F4E8E1;
+            --accent-hover: #ebd5c9;
+            --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.04);
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
-<title>For Keerthi 🌷</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-<style>
+        /* Particles System */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        .petal {
+            position: absolute;
+            background-color: var(--accent-blush);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: floatDown linear forwards;
+            filter: blur(1px);
+        }
 
-body{
-    background:#f8f4ef;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow-x:hidden;
-    font-family:'Poppins',sans-serif;
-    position:relative;
-}
+        @keyframes floatDown {
+            0% { transform: translateY(-5vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
 
-/* Tulips */
+        /* Landing Screen */
+        #landing-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            z-index: 50;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+        }
 
-.tulip{
-    position:absolute;
-    font-size:140px;
-    opacity:0.08;
-    user-select:none;
-}
+        .open-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-blush);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 16px 32px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            letter-spacing: 0.3px;
+        }
 
-.t1{
-    top:20px;
-    left:25px;
-}
+        .open-btn:hover, .open-btn:active {
+            transform: translateY(-2px);
+            background-color: var(--accent-hover);
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.08);
+        }
 
-.t2{
-    bottom:20px;
-    right:25px;
-}
+        /* Main Content */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            min-height: 100%;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            z-index: 10;
+            transition: opacity 1.5s ease 0.3s;
+        }
 
-/* Floating petals */
+        #main-content.visible {
+            opacity: 1;
+            visibility: visible;
+        }
 
-.petal{
-    position:absolute;
-    opacity:0.12;
-    font-size:20px;
-    animation:fall linear infinite;
-}
+        .letter-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 640px;
+            border-radius: 12px;
+            padding: 48px 36px;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
 
-.p1{
-    left:15%;
-    animation-duration:12s;
-}
+        #main-content.visible .letter-card {
+            transform: translateY(0);
+        }
 
-.p2{
-    left:45%;
-    animation-duration:15s;
-    animation-delay:3s;
-}
+        /* Typography */
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
 
-.p3{
-    left:75%;
-    animation-duration:18s;
-    animation-delay:6s;
-}
+        p:last-of-type {
+            margin-bottom: 0;
+        }
 
-@keyframes fall{
-    from{
-        transform:translateY(-100px) rotate(0deg);
-    }
+        .signature {
+            margin-top: 48px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
 
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
-}
+        /* Tulip Accents */
+        .tulip-decor {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            opacity: 0.12;
+            transition: var(--transition-smooth);
+            color: var(--text-light);
+        }
 
-/* Opening section */
+        .tulip-decor:hover {
+            opacity: 0.4;
+            transform: scale(1.1);
+        }
 
-.opening{
-    text-align:center;
-    padding:20px;
-}
+        .tulip-top-right { top: 24px; right: 24px; }
+        .tulip-bottom-left { bottom: 24px; left: 24px; }
 
-.open-btn{
-    background:#e7d1c8;
-    color:#5d4a45;
-    border:none;
-    border-radius:40px;
-    padding:18px 35px;
-    cursor:pointer;
-    font-size:1.1rem;
-    transition:0.3s;
-}
+        /* Music Player */
+        .music-player {
+            margin-top: 50px;
+            background-color: var(--bg-color);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+            transition: var(--transition-smooth);
+        }
 
-.open-btn:hover{
-    transform:translateY(-3px);
-}
+        .music-player.playing {
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02), 0 0 20px rgba(244, 232, 225, 0.6);
+        }
 
-/* Letter */
+        .player-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-.letter{
-    display:none;
-    max-width:900px;
-    margin:40px;
-    background:white;
-    padding:50px;
-    border-radius:25px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.08);
-    animation:fadeIn 1.4s ease;
-}
+        .album-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blush), #e6d3c6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
+        .album-art.spinning {
+            animation: spin 8s linear infinite;
+        }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
 
-h1{
-    text-align:center;
-    margin-bottom:20px;
-    color:#6d5952;
-    font-family:'Cormorant Garamond',serif;
-    font-size:3rem;
-}
+        .song-info {
+            flex-grow: 1;
+        }
 
-.music-container{
-    text-align:center;
-    margin-bottom:30px;
-}
+        .song-title {
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
 
-.music-btn{
-    background:#f0e2db;
-    color:#5c4b46;
-    border:none;
-    padding:12px 24px;
-    border-radius:30px;
-    cursor:pointer;
-    transition:0.3s;
-    font-size:1rem;
-}
+        .song-artist {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
 
-.music-btn:hover{
-    transform:translateY(-2px);
-}
+        .play-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: transform 0.2s ease;
+        }
 
-.message{
-    white-space:pre-line;
-    color:#444;
-    line-height:2;
-    font-size:1rem;
-}
+        .play-btn:active {
+            transform: scale(0.9);
+        }
 
-.signature{
-    margin-top:40px;
-    text-align:right;
-    color:#6d5952;
-    font-family:'Cormorant Garamond',serif;
-    font-size:1.8rem;
-}
+        .play-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
 
-@media(max-width:768px){
+        /* Progress Bar */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
 
-    .letter{
-        padding:30px;
-        margin:15px;
-    }
+        .progress-bar {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: var(--accent-blush);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
 
-    h1{
-        font-size:2.2rem;
-    }
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-main);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
 
-}
+        .progress-bar::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+        }
 
-</style>
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: -4px;
+        }
+        
+        .volume-container svg {
+            width: 16px;
+            height: 16px;
+            color: var(--text-light);
+        }
+
+        .volume-bar {
+            width: 70px;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 3px;
+            background: var(--accent-blush);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-light);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .letter-card {
+                padding: 36px 24px;
+            }
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            .tulip-decor {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="tulip t1">🌷</div>
-<div class="tulip t2">🌷</div>
+    <div id="particles-container"></div>
 
-<div class="petal p1">🌸</div>
-<div class="petal p2">🌸</div>
-<div class="petal p3">🌸</div>
+    <audio id="audio-player" src="gundellona.mp3" preload="metadata"></audio>
 
-<div class="opening" id="opening">
-
-    <button class="open-btn" onclick="openLetter()">
-        Open this when you feel like it 💗
-    </button>
-
-</div>
-
-<div class="letter" id="letter">
-
-    <h1>For Keerthi 🌷</h1>
-
-    <div class="music-container">
-
-        <button class="music-btn" onclick="toggleMusic()">
-            🎵 Play Our Song
-        </button>
-
-        <audio id="bgMusic">
-            <source src="gundellona.mp3" type="audio/mpeg">
-        </audio>
-
+    <div id="landing-screen">
+        <button class="open-btn" onclick="openLetter()">Open this when you feel like it 🌷</button>
     </div>
 
-<div class="message">
+    <div id="main-content">
+        <div class="letter-card">
+            
+            <svg class="tulip-decor tulip-top-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22V12"/>
+                <path d="M12 12C7.5 12 5 8.5 5 5C7 5 9.5 7.5 12 10C14.5 7.5 17 5 19 5C19 8.5 16.5 12 12 12Z"/>
+            </svg>
 
-Hi Keerthi,
+            <p>Hi Keerthi,</p>
+            
+            <p>I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to. It always feels like we're really disconnected from each other.</p>
+            
+            <p>We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.</p>
+            
+            <p>Keerthi, trust me you will feel every hour we put into building our future will be worth it.</p>
+            
+            <p>I, by all means don't take you for granted.</p>
+            
+            <p>I genuinely feel worse when I'm not able to show you the care you need when i really want to.</p>
+            
+            <p>Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.</p>
+            
+            <p>We, yes we have to change it.</p>
+            
+            <p>I don't know if its the right time to send it to you or not, but I genuinely think its always a good time to surprise you with these paragraphs and make you happy.</p>
+            
+            <p>This is my love language, sending letters to you on random occassions to see you happy.</p>
+            
+            <p>You're the best thing that has happened to me, I love you and I'm sorry, i mean these words. really.</p>
+            
+            <p>We have to stay by each others side.</p>
+            
+            <p>If we're not able to text, its okay, its not the end of the world for us, a simple "I'm sorry" and "I love you" will make our day brighter.</p>
+            
+            <p>I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.</p>
+            
+            <p>They made us meet with their own will.</p>
+            
+            <p>Its our task to keep it going no matter how difficult it gets.</p>
+            
+            <p>Kavya, Keerthi, Renii, Bujamma, Diet Coke.</p>
+            
+            <p class="signature">Forever Yours,<br>Conrad</p>
+            <br>
+            <p>You're always mine, I'm always yours.</p>
+            <p>I love you babe. 💗🎀🫶</p>
 
-I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to.
+            <svg class="tulip-decor tulip-bottom-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22V12"/>
+                <path d="M12 12C7.5 12 5 8.5 5 5C7 5 9.5 7.5 12 10C14.5 7.5 17 5 19 5C19 8.5 16.5 12 12 12Z"/>
+            </svg>
 
-It always feels like we're really disconnected from each other.
+            <div class="music-player" id="player-container">
+                <div class="player-top">
+                    <div class="album-art" id="album-art">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A4846" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22V12M12 12C8 12 5 9 5 5C7 5 9 7 12 9C15 7 17 5 19 5C19 9 16 12 12 12Z"/>
+                        </svg>
+                    </div>
+                    <div class="song-info">
+                        <div class="song-title">Gundellona</div>
+                        <div class="song-artist">Playing just for you</div>
+                    </div>
+                    <button class="play-btn" id="play-btn" onclick="togglePlay()">
+                        <svg id="play-icon" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg id="pause-icon" viewBox="0 0 24 24" style="display:none;">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="progress-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" class="progress-bar" id="progress-bar" value="0" min="0" step="1">
+                    <span id="duration-time">0:00</span>
+                </div>
 
-We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.
+                <div class="volume-container">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                    <input type="range" class="volume-bar" id="volume-bar" value="1" min="0" max="1" step="0.01">
+                </div>
+            </div>
 
-Keerthi, trust me you will feel every hour we put into building our future will be worth it.
+        </div>
+    </div>
 
-I, by all means don't take you for granted.
+    <script>
+        // Transition Logic
+        function openLetter() {
+            const landing = document.getElementById('landing-screen');
+            const content = document.getElementById('main-content');
+            
+            landing.style.opacity = '0';
+            setTimeout(() => {
+                landing.style.display = 'none';
+                content.classList.add('visible');
+            }, 1200);
+        }
 
-I genuinely feel worse when I'm not able to show you the care you need when I really want to.
+        // Music Player Logic
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const volumeBar = document.getElementById('volume-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationTimeEl = document.getElementById('duration-time');
+        const albumArt = document.getElementById('album-art');
+        const playerContainer = document.getElementById('player-container');
+        
+        let isPlaying = false;
+        let particleInterval;
 
-Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.
-
-We, yes we have to change it.
-
-I don't know if it's the right time to send it to you or not, but I genuinely think it's always a good time to surprise you with these paragraphs and make you happy.
-
-This is my love language, sending letters to you and making edits of you on random occasions to see you happy.
-
-You're the best thing that has happened to me. You really mean the world to me.
-
-I love you and I'm sorry.
-
-I mean these words.
-
-Really.
-
-We have to stay by each others side.
-
-If we're not able to text, it's okay.
-
-It's not the end of the world for us.
-
-A simple "I'm sorry" and "I love you" will make our day brighter.
-
-I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.
-
-They made us meet with their own will.
-
-Its our task to keep it going no matter how difficult it gets.
-
-Kavya.
-Keerthi.
-Renii.
-Bujamma.
-Diet Coke.
-
-Conrad is always yours.
-
-You're always mine.
-
-I'm always yours.
-
-I love you babe. 💗🎀🫶
-
-</div>
-
-<div class="signature">
-Forever Yours,<br>
-Conrad
-</div>
-
-</div>
-
-<script>
-
-function openLetter(){
-
-    document.getElementById("opening").style.display = "none";
-
-    document.getElementById("letter").style.display = "block";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
-
-function toggleMusic(){
-
-    const music = document.getElementById("bgMusic");
-    const button = document.querySelector(".music-btn");
-
-    if(music.paused){
-
-        music.play();
-
-        button.innerHTML = "⏸ Pause How it all started";
-
-    }else{
-
-        music.pause();
-
-        button.innerHTML = "🎵 Play How it all started";
-
-    }
-}
-
-</script>
-
-</body>
-</html>
-```
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                albumArt.classList.remove('spinning');
+                playerContainer.classList.remove('playing');
+                clearInterval(particleInterval);
+            } else {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                albumArt.classList.add('spinning');
+                playerContainer.classList
