@@ -1,810 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-  <title>a letter for keerthi · tulips & quiet moments</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4efe7" />
+  <title>For Keerthi</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+    :root {
+      --bg: #f4efe7;
+      --bg-2: #efe7dc;
+      --paper: rgba(255, 251, 246, 0.92);
+      --paper-border: rgba(109, 92, 74, 0.10);
+      --text: #4d463f;
+      --muted: #7a6f66;
+      --soft: rgba(120, 98, 80, 0.08);
+      --accent: #d6b0aa;
+      --accent-2: #cfae8f;
+      --shadow: 0 24px 80px rgba(76, 57, 43, 0.12);
+      --shadow-soft: 0 10px 30px rgba(76, 57, 43, 0.08);
+      --radius: 28px;
+      --radius-lg: 34px;
+      --maxw: 760px;
     }
 
-    body {
-      background: #fef9ef;  /* warm cream base */
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', 'Manrope', system-ui, sans-serif;
-      font-weight: 400;
-      color: #2b2a27;
-      line-height: 1.55;
+    * { box-sizing: border-box; }
+    html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
       min-height: 100vh;
-      position: relative;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, Montserrat, Poppins, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(214,176,170,0.16), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(207,174,143,0.14), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* custom soft background atmosphere (particles + subtle motion) */
-    .bg-atmosphere {
+    body::before {
+      content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       pointer-events: none;
-      z-index: 0;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.7) 0.9px, transparent 0.9px),
+        radial-gradient(rgba(255,255,255,0.35) 0.7px, transparent 0.7px);
+      background-size: 34px 34px, 58px 58px;
+      background-position: 0 0, 17px 21px;
+      opacity: 0.16;
+      mix-blend-mode: soft-light;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .scene {
+      position: relative;
+      min-height: 100vh;
       overflow: hidden;
     }
 
-    .bg-atmosphere .petal-static {
+    .intro,
+    .letter-wrap {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .intro {
+      position: relative;
+      text-align: center;
+      isolation: isolate;
+    }
+
+    .intro::after {
+      content: "";
       position: absolute;
-      background: rgba(239, 200, 188, 0.25);
-      border-radius: 80% 20% 70% 30% / 60% 40% 60% 40%;
-      filter: blur(2px);
-      animation: driftStatic 18s infinite ease-in-out;
+      inset: 14% 7%;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.18) 35%, transparent 68%);
+      filter: blur(28px);
+      z-index: -1;
+      opacity: 0.7;
+      transform: scale(1.05);
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1.0); opacity: 0.58; }
+      50% { transform: scale(1.08); opacity: 0.78; }
+    }
+
+    .intro-card {
+      width: min(100%, 540px);
+      padding: 28px 20px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 60px rgba(83, 62, 45, 0.08);
+      border: 1px solid rgba(255,255,255,0.34);
+    }
+
+    .intro h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 5vw, 2.7rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #53483f;
+    }
+
+    .intro p {
+      margin: 0 auto 24px;
+      max-width: 34ch;
+      line-height: 1.7;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .open-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 16px 22px;
+      border-radius: 999px;
+      min-width: min(100%, 320px);
+      font: inherit;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #4d4138;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,238,229,0.92));
+      box-shadow: 0 12px 35px rgba(81, 64, 49, 0.14), inset 0 1px 0 rgba(255,255,255,0.9);
+      border: 1px solid rgba(122, 107, 98, 0.10);
+      transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease, filter 220ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .open-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.48) 20%, transparent 40%);
+      transform: translateX(-120%);
+      transition: transform 700ms ease;
+    }
+
+    .open-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 18px 44px rgba(81, 64, 49, 0.16), inset 0 1px 0 rgba(255,255,255,0.95);
+      filter: saturate(1.02);
+    }
+
+    .open-btn:hover::before { transform: translateX(120%); }
+    .open-btn:active { transform: translateY(1px) scale(0.99); }
+
+    .hint {
+      margin-top: 14px;
+      font-size: 0.92rem;
+      color: rgba(94, 82, 71, 0.72);
+    }
+
+    .letter-wrap {
+      position: relative;
+      padding: 18px 14px 38px;
+      opacity: 0;
+      transform: translateY(22px) scale(0.985);
+      pointer-events: none;
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .scene.revealed .intro {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.99);
+      transition: opacity 550ms ease, transform 550ms ease;
+    }
+
+    .scene.revealed .letter-wrap {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .scene.revealed .floating-petals,
+    .scene.revealed .sparkles {
+      opacity: 1;
+    }
+
+    .letter-card {
+      position: relative;
+      width: min(100%, var(--maxw));
+      background: linear-gradient(180deg, rgba(255,252,248,0.97), rgba(250,244,236,0.96));
+      border: 1px solid var(--paper-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .letter-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(214,176,170,0.22), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(207,174,143,0.15), transparent 20%);
       pointer-events: none;
     }
 
-    @keyframes driftStatic {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-      50% { transform: translateY(-20px) rotate(8deg); opacity: 0.6; }
-      100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+    .letter-inner {
+      position: relative;
+      padding: 28px 18px 20px;
     }
 
-    /* tulip corners - elegant & minimal */
-    .tulip-corner {
-      position: fixed;
-      width: 90px;
-      height: 90px;
-      opacity: 0.18;
-      pointer-events: none;
-      z-index: 2;
-      transition: opacity 0.3s ease, transform 0.4s ease;
-    }
-
-    .tulip-corner svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .tulip-corner:hover {
-      opacity: 0.35;
-      transform: scale(1.02);
-    }
-
-    .corner-tl {
-      top: 12px;
-      left: 12px;
-    }
-
-    .corner-br {
-      bottom: 12px;
-      right: 12px;
-      transform: rotate(180deg);
-    }
-
-    /* landing screen */
-    .landing-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fef9ef;
+    .paper-topline {
       display: flex;
       align-items: center;
-      justify-content: center;
-      z-index: 100;
-      backdrop-filter: blur(0px);
-      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.8s;
-      flex-direction: column;
-      gap: 2rem;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
+      color: rgba(92, 80, 71, 0.7);
+      font-size: 0.86rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
     }
 
-    .landing-screen.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+    .paper-topline .line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, rgba(129, 109, 94, 0.16), transparent);
     }
 
-    .open-button {
-      background: rgba(255, 248, 235, 0.9);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(210, 180, 150, 0.4);
-      padding: 1.1rem 2.2rem;
-      font-size: 1.6rem;
-      font-weight: 500;
-      font-family: inherit;
-      color: #5e4b3a;
-      border-radius: 68px;
-      cursor: pointer;
-      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
-      transition: all 0.25s ease;
-      letter-spacing: -0.2px;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
+    .letter-content {
+      max-width: 64ch;
+      margin: 0 auto;
+      padding: 0 4px;
+      font-size: clamp(1.02rem, 2.4vw, 1.16rem);
+      line-height: 1.95;
+      letter-spacing: 0.002em;
+      color: #514941;
+      text-wrap: pretty;
     }
 
-    .open-button:hover {
-      background: #fffaf2;
-      transform: scale(1.02);
-      box-shadow: 0 20px 32px -12px rgba(0, 0, 0, 0.12);
-      border-color: rgba(200, 165, 130, 0.5);
-    }
-
-    .open-button:active {
-      transform: scale(0.98);
-    }
-
-    /* letter container (hidden initially) */
-    .letter-container {
-      display: none;
-      max-width: 700px;
-      margin: 2rem auto;
-      padding: 1.5rem 1.2rem 3rem;
-      animation: letterGlow 0.9s ease-out;
-    }
-
-    .letter-container.revealed {
-      display: block;
-    }
-
-    @keyframes letterGlow {
-      0% {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* paper card */
-    .letter-card {
-      background: #fffcf7;
-      border-radius: 36px;
-      box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.02);
-      padding: 2.2rem 1.8rem;
-      transition: box-shadow 0.3s;
-      border: 1px solid #f7ede2;
-    }
-
-    /* typography (clean, modern, no cursive) */
     .letter-content p {
-      margin-bottom: 1.35rem;
-      font-size: 1.06rem;
-      letter-spacing: -0.2px;
-      font-weight: 420;
-      color: #2c2a28;
-      line-height: 1.6;
+      margin: 0 0 1.1em;
+      white-space: pre-wrap;
+    }
+
+    .letter-content p:first-child {
+      margin-top: 0;
     }
 
     .letter-content p:last-child {
       margin-bottom: 0;
     }
 
-    /* spacing for the letter */
-    .letter-content {
-      word-break: break-word;
+    .sig {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(123, 106, 95, 0.11);
+      font-size: 1.02rem;
+      line-height: 1.9;
+      color: #5b524b;
     }
 
-    /* music player section */
-    .music-section {
-      margin-top: 3rem;
-      margin-bottom: 2rem;
+    .sig strong {
+      font-weight: 500;
     }
 
-    .spotify-player {
-      background: #fef6ed;
-      border-radius: 32px;
-      padding: 1.2rem;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03), 0 0 0 1px rgba(230, 200, 170, 0.3);
-      transition: box-shadow 0.4s ease, background 0.2s;
-    }
-
-    .spotify-player.playing-glow {
-      box-shadow: 0 0 0 2px rgba(240, 180, 140, 0.4), 0 18px 32px -12px rgba(0, 0, 0, 0.15);
-      background: #fffaf2;
-    }
-
-    .player-inner {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* album artwork rotating */
-    .album-art {
-      flex-shrink: 0;
-      width: 80px;
-      height: 80px;
+    .music-shell {
+      margin-top: 26px;
+      padding: 16px;
       border-radius: 24px;
-      background: linear-gradient(145deg, #f4e2cf, #ffe6d5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      transition: box-shadow 0.2s;
+      background: linear-gradient(180deg, rgba(249,244,237,0.96), rgba(243,235,224,0.96));
+      border: 1px solid rgba(122, 107, 98, 0.10);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .rotating-img {
-      width: 70px;
-      height: 70px;
-      border-radius: 20px;
-      background: #f7e3d3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: rotateAlbum 12s linear infinite;
-      animation-play-state: paused;
+    .music-shell.glow {
+      box-shadow: 0 0 0 1px rgba(219, 188, 173, 0.2), 0 18px 48px rgba(84, 66, 52, 0.16), 0 0 52px rgba(214, 176, 170, 0.12);
     }
 
-    .spotify-player.playing-glow .rotating-img {
-      animation-play-state: running;
-    }
-
-    @keyframes rotateAlbum {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .tulip-icon-album svg {
-      width: 45px;
-      height: 45px;
-      opacity: 0.7;
-    }
-
-    .track-info {
-      flex: 2;
-      min-width: 130px;
-    }
-
-    .song-title {
-      font-weight: 600;
-      font-size: 1.25rem;
-      letter-spacing: -0.3px;
-      color: #4a3727;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .ctrl-btn {
-      background: #fff1e6;
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 60px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      color: #6b4c38;
-    }
-
-    .ctrl-btn:active {
-      transform: scale(0.94);
-      background: #f0e2d4;
-    }
-
-    .progress-area {
-      width: 100%;
-      margin-top: 14px;
-    }
-
-    .time-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: #ad8e72;
-      margin-bottom: 6px;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      height: 4px;
-      -webkit-appearance: none;
-      background: #e6d5c2;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    input[type="range"]:focus {
-      outline: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
-      background: #c47d56;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-      border: none;
-    }
-
-    .volume-control {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: auto;
-    }
-
-    .volume-icon {
-      font-size: 1.1rem;
-    }
-
-    .volume-slider {
-      width: 90px;
-    }
-
-    .signature {
-      margin-top: 2.5rem;
-      text-align: right;
-      padding-top: 1.2rem;
-      border-top: 1px solid #f0e3d8;
-      font-weight: 450;
-      font-size: 1rem;
-      letter-spacing: 0.2px;
-      color: #7c5f48;
-    }
-
-    /* floating petals (music active) */
-    .floating-petal {
-      position: fixed;
+    .music-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(214,176,170,0.18), transparent 30%);
       pointer-events: none;
-      z-index: 120;
-      background: rgba(249, 185, 152, 0.65);
-      border-radius: 70% 30% 65% 35% / 55% 45% 55% 45%;
-      width: 14px;
-      height: 18px;
-      filter: blur(0.8px);
-      animation: floatPetalUp 2.8s ease-out forwards;
     }
 
-    @keyframes floatPetalUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-180px) rotate(35deg);
-        opacity: 0;
-      }
+    .player-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* responsive magic: mobile-first */
-    @media (max-width: 560px) {
-      .letter-card {
-        padding: 1.6rem 1.2rem;
-      }
-      .letter-content p {
-        font-size: 1rem;
-        line-height: 1.55;
-      }
-      .open-button {
-        font-size: 1.35rem;
-        padding: 0.9rem 1.6rem;
-      }
-      .player-inner {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .album-art {
-        align-self: center;
-      }
-      .controls {
-        justify-content: center;
-      }
-      .volume-control {
-        margin-left: 0;
-        justify-content: center;
-        margin-top: 8px;
-      }
-      .track-info {
-        text-align: center;
-      }
-      .song-title {
-        font-size: 1.2rem;
-      }
-      .ctrl-btn {
-        width: 48px;
-        height: 48px;
-      }
+    .player-title {
+      display: grid;
+      gap: 3px;
     }
 
-    @media (max-width: 380px) {
-      .letter-card {
-        padding: 1.4rem 1rem;
-      }
-      .letter-content p {
-        font-size: 0.95rem;
-      }
+    .player-title .song {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #4c433b;
     }
 
-    /* scroll & extras */
-    ::selection {
-      background: #f5dfcf;
-      color: #3f2c1d;
+    .player-title .artist {
+      font-size: 0.88rem;
+      color: var(--muted);
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.7rem;
-      padding: 1.5rem;
-      color: #cbb392;
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(128, 103, 92, 0.35);
+      box-shadow: 0 0 0 5px rgba(128, 103, 92, 0.08);
+      transition: background 180ms ease, box-shadow 180ms ease;
+      flex: 0 0 auto;
     }
 
-    a, button {
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-<div class="bg-atmosphere" id="staticParticles"></div>
-<!-- tulip corners -->
-<div class="tulip-corner corner-tl">
-  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50,20 C35,30 28,48 32,65 C36,78 47,84 58,80 C68,76 74,65 72,54 C70,43 62,34 50,20Z" fill="#e7c7b0" stroke="#dbb694" stroke-width="0.8"/>
-    <path d="M49,20 L49,38 L58,30 L49,20Z" fill="#ddbc9a" stroke="#dbb694" stroke-width="0.5"/>
-    <path d="M51,20 L51,37 L42,31 L51,20Z" fill="#ddbc9a" stroke="#dbb694" stroke-width="0.5"/>
-    <ellipse cx="48" cy="65" rx="4" ry="6" fill="#f3d5bc" transform="rotate(-20 48 65)"/>
-  </svg>
-</div>
-<div class="tulip-corner corner-br">
-  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50,20 C35,30 28,48 32,65 C36,78 47,84 58,80 C68,76 74,65 72,54 C70,43 62,34 50,20Z" fill="#e7c7b0" stroke="#dbb694" stroke-width="0.8"/>
-    <path d="M49,20 L49,38 L58,30 L49,20Z" fill="#ddbc9a" stroke="#dbb694" stroke-width="0.5"/>
-    <path d="M51,20 L51,37 L42,31 L51,20Z" fill="#ddbc9a" stroke="#dbb694" stroke-width="0.5"/>
-    <ellipse cx="48" cy="65" rx="4" ry="6" fill="#f3d5bc" transform="rotate(-20 48 65)"/>
-  </svg>
-</div>
-
-<!-- landing screen -->
-<div class="landing-screen" id="landingScreen">
-  <button class="open-button" id="openLetterBtn">Open this when you feel like it 🌷</button>
-  <div style="font-size:0.85rem; color:#b2977d;">a letter just for you</div>
-</div>
-
-<!-- main letter container -->
-<div class="letter-container" id="letterContainer">
-  <div class="letter-card">
-    <div class="letter-content">
-      <p>Hi Keerthi,</p>
-      <p>I know things have been a bit chaotic lately. Family problems, Travelling, Lack of time or privacy to even text each other like we used to. It always feels like we're really disconnected from each other.</p>
-      <p>We have to understand that there are going to be bigger and longer days where we will barely be able to text for 30 minutes.</p>
-      <p>Keerthi, trust me you will feel every hour we put into building our future will be worth it.</p>
-      <p>I, by all means don't take you for granted.</p>
-      <p>I genuinely feel worse when I'm not able to show you the care you need when i really want to.</p>
-      <p>Many good things and bad things have happened till now, and for some reason our relationship is limited to the screens.</p>
-      <p>We, yes we have to change it.</p>
-      <p>I don't know if its the right time to send it to you or not, but I genuinely think its always a good time to surprise you with these paragraphs and make you happy.</p>
-      <p>This is my love language, sending letters to you on random occassions to see you happy.</p>
-      <p>You're the best thing that has happened to me, I love you and I'm sorry, i mean these words. really.</p>
-      <p>We have to stay by each others side.</p>
-      <p>If we're not able to text, its okay, its not the end of the world for us, a simple "I'm sorry" and "I love you" will make our day brighter.</p>
-      <p>I want us to give our best on working on our future and relationship, and God should always be the center of hope for us.</p>
-      <p>They made us meet with their own will.</p>
-      <p>Its our task to keep it going no matter how difficult it gets.</p>
-      <p>Kavya, Keerthi, Renii, Bujamma, Diet Coke.</p>
-      <p>Conrad is always yours.</p>
-      <p>You're always mine, I'm always yours.</p>
-      <p>I love you babe. 💗🎀🫶</p>
-    </div>
-
-    <!-- music player area -->
-    <div class="music-section">
-      <div class="spotify-player" id="musicPlayerWidget">
-        <div class="player-inner">
-          <div class="album-art">
-            <div class="rotating-img" id="rotatingArt">
-              <div class="tulip-icon-album">
-                <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M32,12 C22,20 16,34 20,46 C24,56 38,58 46,52 C54,46 56,34 50,26 C44,18 38,14 32,12Z" fill="#f7cfb5" stroke="#d99e6b" stroke-width="1.2"/>
-                  <path d="M31,12 L31,26 L37,21 L31,12Z" fill="#eebd98" stroke="#d99e6b" stroke-width="0.9"/>
-                  <path d="M33,12 L33,25 L27,21 L33,12Z" fill="#eebd98" stroke="#d99e6b" stroke-width="0.9"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="track-info">
-            <div class="song-title">Gundellona</div>
-            <div style="font-size: 0.75rem; color:#b48c6f;">for you · tulip edition</div>
-          </div>
-          <div class="controls">
-            <button class="ctrl-btn" id="playPauseBtn">▶</button>
-            <div class="volume-control">
-              <span class="volume-icon">🔊</span>
-              <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="0.65">
-            </div>
-          </div>
-        </div>
-        <div class="progress-area">
-          <div class="time-row">
-            <span id="currentTime">0:00</span>
-            <span id="durationTime">0:00</span>
-          </div>
-          <input type="range" id="progressBar" value="0" step="0.001">
-        </div>
-      </div>
-    </div>
-
-    <div class="signature">
-      Forever Yours,<br>
-      Conrad
-    </div>
-  </div>
-  <footer style="margin-top: 1rem;">always by your side — even through screens</footer>
-</div>
-
-<audio id="audioPlayer" preload="metadata" src="gundellona.mp3"></audio>
-
-<script>
-  (function() {
-    // DOM elements
-    const landing = document.getElementById('landingScreen');
-    const letterContainer = document.getElementById('letterContainer');
-    const openBtn = document.getElementById('openLetterBtn');
-    const audio = document.getElementById('audioPlayer');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const progressSlider = document.getElementById('progressBar');
-    const currentTimeSpan = document.getElementById('currentTime');
-    const durationSpan = document.getElementById('durationTime');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const playerWidget = document.getElementById('musicPlayerWidget');
-    const rotatingWrapper = document.getElementById('rotatingArt');
-
-    // flags & intervals
-    let isPlaying = false;
-    let petalInterval = null;
-    let progressInterval = null;
-
-    // helper: format time (seconds -> mm:ss)
-    function formatTime(sec) {
-      if (isNaN(sec)) return '0:00';
-      const minutes = Math.floor(sec / 60);
-      const seconds = Math.floor(sec % 60);
-      return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    .playing .status-dot {
+      background: #b88a86;
+      box-shadow: 0 0 0 5px rgba(184, 138, 134, 0.15);
     }
 
-    // update progress bar and time display
-    function updateProgress() {
-      if (audio.duration && !isNaN(audio.duration)) {
-        const percent = audio.currentTime / audio.duration;
-        progressSlider.value = percent;
-        currentTimeSpan.textContent = formatTime(audio.currentTime);
-      } else {
-        currentTimeSpan.textContent = '0:00';
-      }
+    .player-body {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
-    function setDurationDisplay() {
-      if (audio.duration && !isNaN(audio.duration)) {
-        durationSpan.textContent = formatTime(audio.duration);
-      } else {
-        durationSpan.textContent = '0:00';
-      }
+    .art {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.8), transparent 24%),
+        radial-gradient(circle at 70% 72%, rgba(255,255,255,0.2), transparent 26%),
+        linear-gradient(145deg, #d8b4b1, #e8d4ba 58%, #c4a796);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 10px 24px rgba(92, 72, 55, 0.16);
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+      transition: transform 280ms ease;
     }
 
-    // handle player visual when music playing (glow, petals)
-    function startMusicVisuals() {
-      if (!playerWidget.classList.contains('playing-glow')) {
-        playerWidget.classList.add('playing-glow');
-      }
-      // start floating petals effect (only while playing)
-      if (petalInterval === null) {
-        petalInterval = setInterval(() => {
-          if (!isPlaying) return;
-          // spawn 2-3 petals per cycle
-          const petalCount = Math.floor(Math.random() * 3) + 2;
-          for (let i = 0; i < petalCount; i++) {
-            createFloatingPetal();
-          }
-        }, 1000);
-      }
+    .playing .art {
+      animation: spin 12s linear infinite;
     }
 
-    function stopMusicVisuals() {
-      if (playerWidget.classList.contains('playing-glow')) {
-        playerWidget.classList.remove('playing-glow');
-      }
-      if (petalInterval) {
-        clearInterval(petalInterval);
-        petalInterval = null;
-      }
-    }
-
-    // create floating petal element (tiny soft petals)
-    function createFloatingPetal() {
-      const petal = document.createElement('div');
-      petal.classList.add('floating-petal');
-      const xPos = Math.random() * window.innerWidth;
-      const size = 10 + Math.random() * 12;
-      petal.style.left = `${xPos}px`;
-      petal.style.bottom = '0px';
-      petal.style.width = `${size}px`;
-      petal.style.height = `${size * 1.2}px`;
-      petal.style.background = `rgba(245, 180, 140, ${0.4 + Math.random() * 0.4})`;
-      petal.style.filter = 'blur(0.6px)';
-      document.body.appendChild(petal);
-      petal.addEventListener('animationend', () => {
-        if (petal && petal.remove) petal.remove();
-      });
-      setTimeout(() => {
-        if (petal && petal.remove) petal.remove();
-      }, 3000);
-    }
-
-    // sync play/pause UI
-    function syncPlayPauseButton() {
-      if (isPlaying) {
-        playPauseBtn.textContent = '⏸️';
-      } else {
-        playPauseBtn.textContent = '▶';
-      }
-    }
-
-    function playAudio() {
-      audio.play().then(() => {
-        isPlaying = true;
-        syncPlayPauseButton();
-        startMusicVisuals();
-        // start progress update interval if not running
-        if (progressInterval === null) {
-          progressInterval = setInterval(() => {
-            if (audio && !audio.paused) {
-              updateProgress();
-            }
-          }, 200);
-        }
-      }).catch(err => {
-        console.warn("Playback prevented (user interaction needed)", err);
-        // fallback: force pause state UI consistent
-        isPlaying = false;
-        syncPlayPauseButton();
-        stopMusicVisuals();
-      });
-    }
-
-    function pauseAudio() {
-      audio.pause();
-      isPlaying = false;
-      syncPlayPauseButton();
-      stopMusicVisuals();
-      if (progressInterval) {
-        clearInterval(progressInterval);
-        progressInterval = null;
-      }
-      // still update manual once
-      updateProgress();
-    }
-
-    function togglePlayPause() {
-      if (isPlaying) {
-        pauseAudio();
-      } else {
-        playAudio();
-      }
-    }
-
-    // seek when progress slider changes
-    progressSlider.addEventListener('input', (e) => {
-      if (audio.duration && !isNaN(audio.duration)) {
-        const newTime = parseFloat(e.target.value) * audio.duration;
-        audio.currentTime = newTime;
-        updateProgress();
-      }
-    });
-
-    // volume control
-    volumeSlider.addEventListener('input', (e) => {
-      audio.volume = parseFloat(e.target.value);
-    });
-
-    // audio metadata loaded
-    audio.addEventListener('loadedmetadata', () => {
-      setDurationDisplay();
-      progressSlider.value = 0;
-      currentTimeSpan.textContent = '0:00';
-    });
-
-    audio.addEventListener('timeupdate', () => {
-      if (!progressSlider.dragging) {
-        updateProgress();
-        if (audio.duration) {
-          durationSpan.textContent = formatTime(audio.duration);
-        }
-      }
-    });
-
-    audio.addEventListener('ended', () => {
-      isPlaying = false;
-      syncPlayPauseButton();
-      stopMusicVisuals();
-      if (progressInterval) {
-        clearInterval(progressInterval);
-        progressInterval = null;
-      }
-      progressSlider.value = 0;
-      currentTimeSpan.textContent = formatTime(0);
-    });
-
-    audio.addEventListener('canplay', () => {
-      setDurationDisplay();
-    });
-
-    // Manual sync fix for duration if metadata not loaded
-    setInterval(() => {
-      if (audio.duration && !isNaN(audio.duration) && durationSpan.textContent === '0:00') {
-        durationSpan.textContent = formatTime(audio.duration);
-      }
-    }, 500);
-
-    playPauseBtn.addEventListener('click', togglePlayPause);
-
-    // volume default
-    audio.volume = 0.65;
-
-    // Reveal letter with premium unfold effect
-    openBtn.addEventListener('click', () => {
-      landing.classList.add('hide');
-      letterContainer.classList.add('revealed');
-      // smooth background little parallax warmth
-      document.body.style.background = '#fdf7ef';
-      // optional: gentle scroll after reveal
-      setTimeout(() => {
-        letterContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200);
-      // preload audio metadata if not yet
-      audio.load();
-    });
-
-    // corner tulip hover effect already set in css
-
-    // also generate subtle static background petals (ambiance)
-    function generateAmbientPetals() {
-      const staticContainer = document.getElementById('staticParticles');
-      for (let i = 0; i < 24; i++) {
-        const petal = document.createElement('div');
-        petal.classList.add('petal-static');
-        const size = 8 + Math.random() * 20;
-        petal.style.width = `${size}px`;
-        petal.style.height = `${size * 1.4}px`;
-        petal.style.left = `${Math.random() * 100}%`;
-        petal.style.top = `${Math.random() * 100}%`;
-        petal.style.animationDelay = `${Math.random() * 15}s`;
-        petal.style.animationDuration = `${12 + Math.random() * 20}s`;
-        petal.style.opacity = 0.2 + Math.random() * 0.3;
-        staticContainer.appendChild(petal);
-      }
-    }
-    generateAmbientPetals();
-
-    // guarantee no horizontal scrolling, fix layout
-    window.addEventListener('resize', () => {
-      document.documentElement.style.overflowX = 'hidden';
-      document.body.style.overflowX = 'hidden';
-    });
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
-
-    // ensure progress bar thumb interaction friendly
-    progressSlider.addEventListener('mousedown', () => { progressSlider.dragging = true; });
-    progressSlider.addEventListener('mouseup', () => { progressSlider.dragging = false; });
-    progressSlider.addEventListener('touchstart', () => { progressSlider.dragging = true; });
-    progressSlider.addEventListener('touchend', () => { progressSlider.dragging = false; });
-  })();
-</script>
-</body>
-</html>
+    .art::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 18px;
+      border
